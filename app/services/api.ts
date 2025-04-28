@@ -3,7 +3,7 @@ import type { Person } from "../types";
 import { mockPeople } from "./mockData";
 
 const BASE_URL = "https://forinterview.onrender.com";
-const USE_MOCK_DATA = true; // Set to true to use mock data instead of the real API
+const USE_MOCK_DATA = false; // Set to true to use mock data instead of the real API
 
 export const fetchPeople = async (): Promise<Person[]> => {
   console.log(`Fetching people from ${BASE_URL}/people`);
