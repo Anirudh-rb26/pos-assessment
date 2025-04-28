@@ -12,8 +12,11 @@ const nextConfig: NextConfig = {
     // your project has type errors.
     ignoreBuildErrors: true,
   },
-  output: 'standalone',
+  output: 'export',
   trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
   // Uncomment if your app is not hosted at the root path
   // basePath: '/your-base-path',
 };
