@@ -1,10 +1,6 @@
 {
   "version": 2,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/" }
-  ],
   "buildCommand": "npm run build",
   "outputDirectory": "out",
-  "framework": "nextjs"
+  "framework": null
 }

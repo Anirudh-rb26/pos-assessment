@@ -11,8 +11,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // This ensures all routes work correctly
-  distDir: 'out',
+  // Remove distDir setting as it conflicts with output: 'export'
 };
 
 module.exports = nextConfig;
