@@ -1,10 +1,18 @@
 import axios from "axios";
 import type { Person } from "../types";
+import { mockPeople } from "./mockData";
 
 const BASE_URL = "https://forinterview.onrender.com";
+const USE_MOCK_DATA = true; // Set to true to use mock data instead of the real API
 
 export const fetchPeople = async (): Promise<Person[]> => {
   console.log(`Fetching people from ${BASE_URL}/people`);
+  
+  // Use mock data if enabled or as fallback
+  if (USE_MOCK_DATA) {
+    console.log("Using mock data instead of API");
+    return mockPeople;
+  }
 
   try {
     const response = await axios.get(`${BASE_URL}/people`);
@@ -53,12 +61,20 @@ export const fetchPeople = async (): Promise<Person[]> => {
     return response.data;
   } catch (error) {
     console.error("Error fetching people:", error);
-    return [];
+    console.log("Falling back to mock data due to API error");
+    return mockPeople; // Fallback to mock data on error
   }
 };
 
 export const fetchPersonDetails = async (id: string): Promise<Person | null> => {
   console.log(`Fetching details for person ID: ${id}`);
+  
+  // Use mock data if enabled or as fallback
+  if (USE_MOCK_DATA) {
+    console.log("Using mock data instead of API for person details");
+    const mockPerson = mockPeople.find(person => person.id === id);
+    return mockPerson || null;
+  }
 
   try {
     const response = await axios.get(`${BASE_URL}/people/${id}`);
@@ -73,6 +89,14 @@ export const fetchPersonDetails = async (id: string): Promise<Person | null> => 
     return response.data;
   } catch (error) {
     console.error(`Error fetching person details for ID ${id}:`, error);
+    
+    // Try to find the person in mock data as fallback
+    const mockPerson = mockPeople.find(person => person.id === id);
+    if (mockPerson) {
+      console.log(`Falling back to mock data for person ID ${id}`);
+      return mockPerson;
+    }
+    
     return null;
   }
 };
